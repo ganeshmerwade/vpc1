@@ -1,0 +1,83 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_eip.nat_eip (expand)" [label = "aws_eip.nat_eip", shape = "box"]
+		"[root] aws_internet_gateway.ig (expand)" [label = "aws_internet_gateway.ig", shape = "box"]
+		"[root] aws_nat_gateway.nat (expand)" [label = "aws_nat_gateway.nat", shape = "box"]
+		"[root] aws_route.private_nat_gateway (expand)" [label = "aws_route.private_nat_gateway", shape = "box"]
+		"[root] aws_route.public_internet_gateway (expand)" [label = "aws_route.public_internet_gateway", shape = "box"]
+		"[root] aws_route_table.private (expand)" [label = "aws_route_table.private", shape = "box"]
+		"[root] aws_route_table.public (expand)" [label = "aws_route_table.public", shape = "box"]
+		"[root] aws_route_table_association.private_application (expand)" [label = "aws_route_table_association.private_application", shape = "box"]
+		"[root] aws_route_table_association.private_database (expand)" [label = "aws_route_table_association.private_database", shape = "box"]
+		"[root] aws_route_table_association.private_middleware (expand)" [label = "aws_route_table_association.private_middleware", shape = "box"]
+		"[root] aws_route_table_association.public (expand)" [label = "aws_route_table_association.public", shape = "box"]
+		"[root] aws_security_group.default (expand)" [label = "aws_security_group.default", shape = "box"]
+		"[root] aws_subnet.private_application_subnet (expand)" [label = "aws_subnet.private_application_subnet", shape = "box"]
+		"[root] aws_subnet.private_database_subnet (expand)" [label = "aws_subnet.private_database_subnet", shape = "box"]
+		"[root] aws_subnet.private_middleware_subnet (expand)" [label = "aws_subnet.private_middleware_subnet", shape = "box"]
+		"[root] aws_subnet.public_subnet (expand)" [label = "aws_subnet.public_subnet", shape = "box"]
+		"[root] aws_vpc.vpc (expand)" [label = "aws_vpc.vpc", shape = "box"]
+		"[root] data.aws_availability_zones.available (expand)" [label = "data.aws_availability_zones.available", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.availability_zones" [label = "var.availability_zones", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.private_application_subnets_cidr" [label = "var.private_application_subnets_cidr", shape = "note"]
+		"[root] var.private_database_subnets_cidr" [label = "var.private_database_subnets_cidr", shape = "note"]
+		"[root] var.private_middleware_subnets_cidr" [label = "var.private_middleware_subnets_cidr", shape = "note"]
+		"[root] var.public_subnets_cidr" [label = "var.public_subnets_cidr", shape = "note"]
+		"[root] var.region" [label = "var.region", shape = "note"]
+		"[root] var.vpc_cidr" [label = "var.vpc_cidr", shape = "note"]
+		"[root] aws_eip.nat_eip (expand)" -> "[root] aws_internet_gateway.ig (expand)"
+		"[root] aws_internet_gateway.ig (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_nat_gateway.nat (expand)" -> "[root] aws_eip.nat_eip (expand)"
+		"[root] aws_nat_gateway.nat (expand)" -> "[root] aws_subnet.public_subnet (expand)"
+		"[root] aws_route.private_nat_gateway (expand)" -> "[root] aws_nat_gateway.nat (expand)"
+		"[root] aws_route.private_nat_gateway (expand)" -> "[root] aws_route_table.private (expand)"
+		"[root] aws_route.public_internet_gateway (expand)" -> "[root] aws_internet_gateway.ig (expand)"
+		"[root] aws_route.public_internet_gateway (expand)" -> "[root] aws_route_table.public (expand)"
+		"[root] aws_route_table.private (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_route_table.public (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_route_table_association.private_application (expand)" -> "[root] aws_route_table.private (expand)"
+		"[root] aws_route_table_association.private_application (expand)" -> "[root] aws_subnet.private_application_subnet (expand)"
+		"[root] aws_route_table_association.private_database (expand)" -> "[root] aws_route_table.private (expand)"
+		"[root] aws_route_table_association.private_database (expand)" -> "[root] aws_subnet.private_database_subnet (expand)"
+		"[root] aws_route_table_association.private_middleware (expand)" -> "[root] aws_route_table.private (expand)"
+		"[root] aws_route_table_association.private_middleware (expand)" -> "[root] aws_subnet.private_middleware_subnet (expand)"
+		"[root] aws_route_table_association.public (expand)" -> "[root] aws_route_table.public (expand)"
+		"[root] aws_route_table_association.public (expand)" -> "[root] aws_subnet.public_subnet (expand)"
+		"[root] aws_security_group.default (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_subnet.private_application_subnet (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_subnet.private_application_subnet (expand)" -> "[root] var.availability_zones"
+		"[root] aws_subnet.private_application_subnet (expand)" -> "[root] var.private_application_subnets_cidr"
+		"[root] aws_subnet.private_database_subnet (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_subnet.private_database_subnet (expand)" -> "[root] var.availability_zones"
+		"[root] aws_subnet.private_database_subnet (expand)" -> "[root] var.private_database_subnets_cidr"
+		"[root] aws_subnet.private_middleware_subnet (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_subnet.private_middleware_subnet (expand)" -> "[root] var.availability_zones"
+		"[root] aws_subnet.private_middleware_subnet (expand)" -> "[root] var.private_middleware_subnets_cidr"
+		"[root] aws_subnet.public_subnet (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] aws_subnet.public_subnet (expand)" -> "[root] var.availability_zones"
+		"[root] aws_subnet.public_subnet (expand)" -> "[root] var.public_subnets_cidr"
+		"[root] aws_vpc.vpc (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_vpc.vpc (expand)" -> "[root] var.environment"
+		"[root] aws_vpc.vpc (expand)" -> "[root] var.vpc_cidr"
+		"[root] data.aws_availability_zones.available (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] output.public_subnet_ids (expand)" -> "[root] aws_subnet.public_subnet (expand)"
+		"[root] output.vpc_id (expand)" -> "[root] aws_vpc.vpc (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route.private_nat_gateway (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route.public_internet_gateway (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.private_application (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.private_database (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.private_middleware (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.public (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_security_group.default (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] data.aws_availability_zones.available (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] var.region"
+		"[root] root" -> "[root] output.public_subnet_ids (expand)"
+		"[root] root" -> "[root] output.vpc_id (expand)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+

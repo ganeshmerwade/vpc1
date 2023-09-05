@@ -1,0 +1,12 @@
+root_region="us-east-1"
+root_environment="devopsninja"
+root_vpc_cidr="10.0.0.0/17"
+root_public_subnets_cidr=["10.0.0.0/25","10.0.1.0/25"]
+root_private_application_subnets_cidr=["10.0.8.0/21","10.0.16.0/21"]
+root_private_database_subnets_cidr=["10.0.24.0/23","10.0.26.0/23"]
+root_private_middleware_subnets_cidr=["10.0.28.0/22","10.0.32.0/22"]
+# availability_zones = tolist(["data.aws_availability_zones.available.names[0]", "data.aws_availability_zones.available.names[1]", "data.aws_availability_zones.available.names[2]"])
+root_key_pair_key_name = "devopsninja"
+root_key_pair_path = "./keys/devopsninja.pem"
+root_ec2_ami_id = "ami-0261755bbcb8c4a84"
+root_ec2_instance_type = "t2.micro"
